@@ -45,6 +45,7 @@ public partial class ReferralService
         var owner = customers.SingleOrDefault(x => x.Code == code) ?? throw new RuleException("This referral code does not exist.");
         Require(owner.CodeActive, "This referral code is paused. Ask your friend for an active code.");
         Require(owner.Id != ownId, "You cannot use your own referral code.");
+        RequireReferralEligibility(owner);
         return owner;
     }
     public Customer Register(string? name, string? email, string? referralCode, bool onboardingRequired = false)

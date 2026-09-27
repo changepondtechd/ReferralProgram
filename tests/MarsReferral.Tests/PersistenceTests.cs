@@ -23,6 +23,7 @@ internal static class PersistenceTests
             {
                 Check(s.Read().Customers.Length == 0 && File.Exists(path));
                 var referrer = s.Register("Test Referrer", "referrer@example.com", null);
+                ReferralTestSetup.Fund(s, referrer.Id);
                 s.Refer(new(referrer.Id), "Direct Friend", "direct@example.com", "+1 416 555 0123");
                 var c = s.Register("Persistent Customer", "persist@example.com", null, true);
                 addedId = c.Id;

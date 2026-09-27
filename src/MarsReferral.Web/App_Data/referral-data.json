@@ -14,189 +14,76 @@
     },
     {
       "Id": 2,
-      "Name": "Olivia Martin",
-      "Email": "olivia.martin@example.com",
+      "Name": "Peter",
+      "Email": "peter@gmail.com",
       "Code": "MARS000002",
       "CodeActive": true,
       "ReferrerId": 1,
-      "AttachedAt": "2026-09-18T11:46:43.6060367+00:00",
-      "JoinedAt": "2026-09-18T11:46:43.6060367+00:00",
+      "AttachedAt": "2026-09-27T11:53:06.5140617+00:00",
+      "JoinedAt": "2026-09-27T11:53:06.5140617+00:00",
       "OnboardingComplete": true,
-      "Phone": ""
+      "Phone": "918054082441"
     },
     {
       "Id": 3,
-      "Name": "Ethan Wilson",
-      "Email": "ethan.wilson@example.com",
+      "Name": "Tatiana",
+      "Email": "tatiana@gmail.com",
       "Code": "MARS000003",
       "CodeActive": true,
-      "ReferrerId": null,
-      "AttachedAt": null,
-      "JoinedAt": "2026-09-18T11:46:43.6128905+00:00",
-      "OnboardingComplete": true,
-      "Phone": ""
-    },
-    {
-      "Id": 4,
-      "Name": "Emma Anderson",
-      "Email": "emma.anderson@example.com",
-      "Code": "MARS000004",
-      "CodeActive": true,
       "ReferrerId": 1,
-      "AttachedAt": "2026-09-18T11:46:43.6130322+00:00",
-      "JoinedAt": "2026-09-18T11:46:43.6130322+00:00",
+      "AttachedAt": "2026-09-27T12:12:35.6100566+00:00",
+      "JoinedAt": "2026-09-27T12:12:35.6100566+00:00",
       "OnboardingComplete": true,
-      "Phone": ""
-    },
-    {
-      "Id": 5,
-      "Name": "Noah Bennett",
-      "Email": "noah.bennett@example.com",
-      "Code": "MARS000005",
-      "CodeActive": true,
-      "ReferrerId": 1,
-      "AttachedAt": "2026-09-18T11:46:43.6130618+00:00",
-      "JoinedAt": "2026-09-18T11:46:43.6130618+00:00",
-      "OnboardingComplete": true,
-      "Phone": ""
-    },
-    {
-      "Id": 6,
-      "Name": "Charlotte Clark",
-      "Email": "charlotte.clark@example.com",
-      "Code": "MARS000006",
-      "CodeActive": false,
-      "ReferrerId": null,
-      "AttachedAt": null,
-      "JoinedAt": "2026-09-18T11:46:43.613072+00:00",
-      "OnboardingComplete": true,
-      "Phone": ""
+      "Phone": "918054082441"
     }
   ],
   "Applications": [
-    {
-      "Id": 1001,
-      "CustomerId": 2,
-      "Purpose": "Home purchase",
-      "Amount": 240000,
-      "Stage": "Submitted",
-      "CreatedAt": "2026-09-18T11:46:43.6176862+00:00",
-      "FundedAt": null,
-      "ApprovedAmount": null
-    },
-    {
-      "Id": 1002,
-      "CustomerId": 4,
-      "Purpose": "Refinance",
-      "Amount": 185000,
-      "Stage": "Funded",
-      "CreatedAt": "2026-09-18T11:46:43.6182109+00:00",
-      "FundedAt": "2026-09-18T11:46:43.623774+00:00",
-      "ApprovedAmount": 185000
-    },
-    {
-      "Id": 1003,
-      "CustomerId": 5,
-      "Purpose": "Home improvement",
-      "Amount": 45000,
-      "Stage": "Funded",
-      "CreatedAt": "2026-09-18T11:46:43.624525+00:00",
-      "FundedAt": "2026-09-18T11:46:43.6245473+00:00",
-      "ApprovedAmount": 45000
-    },
     {
       "Id": 1004,
       "CustomerId": 1,
       "Purpose": "Home purchase",
       "Amount": 320000,
-      "Stage": "Approved",
+      "Stage": "Funded",
       "CreatedAt": "2026-09-18T11:46:43.6327319+00:00",
-      "FundedAt": null,
+      "FundedAt": "2026-09-27T11:23:04.9608104+00:00",
       "ApprovedAmount": 320000
+    },
+    {
+      "Id": 1005,
+      "CustomerId": 3,
+      "Purpose": "Home purchase",
+      "Amount": 25000,
+      "Stage": "Funded",
+      "CreatedAt": "2026-09-27T12:15:15.3367154+00:00",
+      "FundedAt": "2026-09-27T12:15:28.7928445+00:00",
+      "ApprovedAmount": 25000
     }
   ],
   "Rewards": [
     {
       "Id": 2001,
-      "BeneficiaryId": 4,
-      "ReferredId": 4,
-      "ApplicationId": 1002,
+      "BeneficiaryId": 3,
+      "ReferredId": 3,
+      "ApplicationId": 1005,
       "Kind": "Welcome bonus",
       "Amount": 25,
-      "Stage": "Pending",
-      "Note": "",
-      "Reference": ""
+      "Stage": "Paid",
+      "Note": "Demo payment confirmed",
+      "Reference": "PAY-F5892E140A4D"
     },
     {
       "Id": 2002,
       "BeneficiaryId": 1,
-      "ReferredId": 4,
-      "ApplicationId": 1002,
-      "Kind": "Referral bonus",
-      "Amount": 50,
-      "Stage": "Approved",
-      "Note": "",
-      "Reference": ""
-    },
-    {
-      "Id": 2003,
-      "BeneficiaryId": 5,
-      "ReferredId": 5,
-      "ApplicationId": 1003,
-      "Kind": "Welcome bonus",
-      "Amount": 25,
-      "Stage": "Paid",
-      "Note": "Demo payment confirmed",
-      "Reference": "SEED-2003"
-    },
-    {
-      "Id": 2004,
-      "BeneficiaryId": 1,
-      "ReferredId": 5,
-      "ApplicationId": 1003,
+      "ReferredId": 3,
+      "ApplicationId": 1005,
       "Kind": "Referral bonus",
       "Amount": 50,
       "Stage": "Paid",
       "Note": "Demo payment confirmed",
-      "Reference": "SEED-2004"
+      "Reference": "PAY-8F5C60850688"
     }
   ],
   "Messages": [
-    {
-      "Id": 1,
-      "CustomerId": 2,
-      "Title": "Referral attached",
-      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
-      "CreatedAt": "2026-09-18T11:46:43.6075645+00:00"
-    },
-    {
-      "Id": 2,
-      "CustomerId": 4,
-      "Title": "Referral attached",
-      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
-      "CreatedAt": "2026-09-18T11:46:43.6130359+00:00"
-    },
-    {
-      "Id": 3,
-      "CustomerId": 5,
-      "Title": "Referral attached",
-      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
-      "CreatedAt": "2026-09-18T11:46:43.6130649+00:00"
-    },
-    {
-      "Id": 4,
-      "CustomerId": 4,
-      "Title": "Your funding is complete",
-      "Body": "Your account credit is confirmed in this simulation. Invite a friend using MARS000004. Visit the referral guide to explore the demo benefit and conditions. No message was sent externally.",
-      "CreatedAt": "2026-09-18T11:46:43.6241853+00:00"
-    },
-    {
-      "Id": 5,
-      "CustomerId": 4,
-      "Title": "Reward under review",
-      "Body": "Your $25 welcome reward is awaiting operations approval.",
-      "CreatedAt": "2026-09-18T11:46:43.6245098+00:00"
-    },
     {
       "Id": 6,
       "CustomerId": 1,
@@ -205,39 +92,11 @@
       "CreatedAt": "2026-09-18T11:46:43.624511+00:00"
     },
     {
-      "Id": 7,
-      "CustomerId": 5,
-      "Title": "Your funding is complete",
-      "Body": "Your account credit is confirmed in this simulation. Invite a friend using MARS000005. Visit the referral guide to explore the demo benefit and conditions. No message was sent externally.",
-      "CreatedAt": "2026-09-18T11:46:43.62455+00:00"
-    },
-    {
-      "Id": 8,
-      "CustomerId": 5,
-      "Title": "Reward under review",
-      "Body": "Your $25 welcome reward is awaiting operations approval.",
-      "CreatedAt": "2026-09-18T11:46:43.62471+00:00"
-    },
-    {
       "Id": 9,
       "CustomerId": 1,
       "Title": "A friend reached funding",
       "Body": "Noah Bennett reached qualifying funding. Your $50 referral reward is under review.",
       "CreatedAt": "2026-09-18T11:46:43.6247107+00:00"
-    },
-    {
-      "Id": 10,
-      "CustomerId": 5,
-      "Title": "Reward approved",
-      "Body": "Your welcome bonus of $25 CAD was approved. ",
-      "CreatedAt": "2026-09-18T11:46:43.6306366+00:00"
-    },
-    {
-      "Id": 11,
-      "CustomerId": 5,
-      "Title": "Reward paid",
-      "Body": "Your $25 CAD were paid in the demo. Reference: SEED-2003.",
-      "CreatedAt": "2026-09-18T11:46:43.6325898+00:00"
     },
     {
       "Id": 12,
@@ -259,15 +118,309 @@
       "Title": "Reward approved",
       "Body": "Your referral bonus of $50 CAD was approved. ",
       "CreatedAt": "2026-09-18T11:50:44.3092719+00:00"
+    },
+    {
+      "Id": 15,
+      "CustomerId": 1,
+      "Title": "Referral link sent (demo)",
+      "Body": "Your WhatsApp invitation to Sophie Campbell was recorded. Open Sharing demo to simulate delivery and view the recipient experience.",
+      "CreatedAt": "2026-09-27T07:37:31.8465045+00:00"
+    },
+    {
+      "Id": 16,
+      "CustomerId": 1,
+      "Title": "Referral link sent (demo)",
+      "Body": "Your WhatsApp invitation to Sophie Campbell was recorded. Open Sharing demo to simulate delivery and view the recipient experience.",
+      "CreatedAt": "2026-09-27T07:51:36.9195942+00:00"
+    },
+    {
+      "Id": 17,
+      "CustomerId": 1,
+      "Title": "Referral link sent (demo)",
+      "Body": "Your WhatsApp invitation to Sophie Campbell was recorded. Open Sharing demo to simulate delivery and view the recipient experience.",
+      "CreatedAt": "2026-09-27T07:57:34.510469+00:00"
+    },
+    {
+      "Id": 19,
+      "CustomerId": 1,
+      "Title": "Your circle has grown",
+      "Body": "Test can now choose their name on customer demo sign-in. Rewards require eligible funding and approval.",
+      "CreatedAt": "2026-09-27T08:03:55.1602386+00:00"
+    },
+    {
+      "Id": 22,
+      "CustomerId": 1,
+      "Title": "Your referral has made an enquiry",
+      "Body": "A referred visitor has requested a salesperson follow-up. Rewards still require qualifying funding and approval.",
+      "CreatedAt": "2026-09-27T09:50:35.737613+00:00"
+    },
+    {
+      "Id": 32,
+      "CustomerId": 1,
+      "Title": "Your funding is complete",
+      "Body": "Your account credit is confirmed in this simulation. Invite a friend using MARS000001. Visit the referral guide to explore the demo benefit and conditions. No message was sent externally.",
+      "CreatedAt": "2026-09-27T11:23:04.9738353+00:00"
+    },
+    {
+      "Id": 33,
+      "CustomerId": 1,
+      "Title": "Referral link sent (demo)",
+      "Body": "Your WhatsApp invitation to Sophie Campbell was recorded. Open Sharing demo to simulate delivery and view the recipient experience.",
+      "CreatedAt": "2026-09-27T11:48:22.7060522+00:00"
+    },
+    {
+      "Id": 34,
+      "CustomerId": 2,
+      "Title": "Referral attached",
+      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
+      "CreatedAt": "2026-09-27T11:53:06.5142903+00:00"
+    },
+    {
+      "Id": 35,
+      "CustomerId": 1,
+      "Title": "Your circle has grown",
+      "Body": "Peter can now choose their name on customer demo sign-in. Rewards require eligible funding and approval.",
+      "CreatedAt": "2026-09-27T11:53:06.5159763+00:00"
+    },
+    {
+      "Id": 36,
+      "CustomerId": 2,
+      "Title": "Your demo account is ready",
+      "Body": "Liam Thompson referred you. Your referral code is already attached to your profile.",
+      "CreatedAt": "2026-09-27T11:53:06.5159771+00:00"
+    },
+    {
+      "Id": 37,
+      "CustomerId": 1,
+      "Title": "Referral link sent (demo)",
+      "Body": "Your WhatsApp invitation to Tatiana was recorded. Open Sharing demo to simulate delivery and view the recipient experience.",
+      "CreatedAt": "2026-09-27T12:10:17.0187925+00:00"
+    },
+    {
+      "Id": 38,
+      "CustomerId": 1,
+      "Title": "Your referral has made an enquiry",
+      "Body": "A referred visitor has requested a salesperson follow-up. Rewards still require qualifying funding and approval.",
+      "CreatedAt": "2026-09-27T12:12:35.6040898+00:00"
+    },
+    {
+      "Id": 39,
+      "CustomerId": 3,
+      "Title": "Referral attached",
+      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
+      "CreatedAt": "2026-09-27T12:12:35.610342+00:00"
+    },
+    {
+      "Id": 40,
+      "CustomerId": 3,
+      "Title": "Your enquiry is ready to track",
+      "Body": "Your enquiry has been assigned to Sarah Mitchell. Open My enquiries in the customer portal to follow its progress. No reward is earned until qualifying funding and approval.",
+      "CreatedAt": "2026-09-27T12:12:35.6130787+00:00"
+    },
+    {
+      "Id": 41,
+      "CustomerId": 3,
+      "Title": "Application amount approved",
+      "Body": "Admin approved 25,000.00 demo units for application #1005. Funding has not yet been confirmed.",
+      "CreatedAt": "2026-09-27T12:15:22.6037908+00:00"
+    },
+    {
+      "Id": 42,
+      "CustomerId": 3,
+      "Title": "Your funding is complete",
+      "Body": "Your account credit is confirmed in this simulation. Invite a friend using MARS000003. Visit the referral guide to explore the demo benefit and conditions. No message was sent externally.",
+      "CreatedAt": "2026-09-27T12:15:28.7933485+00:00"
+    },
+    {
+      "Id": 43,
+      "CustomerId": 3,
+      "Title": "Reward under review",
+      "Body": "Your $25 welcome reward is awaiting operations approval.",
+      "CreatedAt": "2026-09-27T12:15:28.7938743+00:00"
+    },
+    {
+      "Id": 44,
+      "CustomerId": 1,
+      "Title": "A friend reached funding",
+      "Body": "Tatiana reached qualifying funding. Your $50 referral reward is under review.",
+      "CreatedAt": "2026-09-27T12:15:28.793877+00:00"
+    },
+    {
+      "Id": 45,
+      "CustomerId": 3,
+      "Title": "Reward approved",
+      "Body": "Your welcome bonus of $25.00 CAD was approved. ",
+      "CreatedAt": "2026-09-27T12:15:41.5565397+00:00"
+    },
+    {
+      "Id": 46,
+      "CustomerId": 3,
+      "Title": "Reward paid",
+      "Body": "Your $25.00 CAD reward were paid in the demo. Reference: PAY-F5892E140A4D.",
+      "CreatedAt": "2026-09-27T12:15:44.5337314+00:00"
+    },
+    {
+      "Id": 47,
+      "CustomerId": 1,
+      "Title": "Reward approved",
+      "Body": "Your referral bonus of $50.00 CAD was approved. ",
+      "CreatedAt": "2026-09-27T12:18:19.5132013+00:00"
+    },
+    {
+      "Id": 48,
+      "CustomerId": 1,
+      "Title": "Reward paid",
+      "Body": "Your $50.00 CAD reward were paid in the demo. Reference: PAY-8F5C60850688.",
+      "CreatedAt": "2026-09-27T12:18:22.7476957+00:00"
     }
   ],
   "Audit": [
     {
-      "At": "2026-09-24T17:23:16.5524044+00:00",
+      "At": "2026-09-27T12:18:22.7476866+00:00",
       "Actor": "Admin",
-      "Action": "Sample enquiry loaded",
-      "Detail": "Fictional POC enquiry for Sophie Campbell; status Contacted. No external communication occurred.",
+      "Action": "Payout simulated",
+      "Detail": "Reward #2002: paid, reference PAY-8F5C60850688.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T12:18:19.5131814+00:00",
+      "Actor": "Admin",
+      "Action": "Reward reviewed",
+      "Detail": "Reward #2002: Approved.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T12:15:44.5337068+00:00",
+      "Actor": "Admin",
+      "Action": "Payout simulated",
+      "Detail": "Reward #2001: paid, reference PAY-F5892E140A4D.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:15:41.5565051+00:00",
+      "Actor": "Admin",
+      "Action": "Reward reviewed",
+      "Detail": "Reward #2001: Approved.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:15:28.7928738+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1005: Funded.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:15:22.6037838+00:00",
+      "Actor": "Admin",
+      "Action": "Amount approved",
+      "Detail": "Application #1005: requested 25,000.00, approved 25,000.00 demo units.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:15:22.6022256+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1005: Approved.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:15:15.3367602+00:00",
+      "Actor": "Admin",
+      "Action": "Application submitted",
+      "Detail": "Application #1005 for Tatiana.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:12:35.613072+00:00",
+      "Actor": "Customer #3",
+      "Action": "Enquiry account linked",
+      "Detail": "Enquiry 74330a920e084c0b97a2460e38a69147 linked to Tatiana\u0027s demo account. Account created automatically.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:12:35.6103355+00:00",
+      "Actor": "Customer #3",
+      "Action": "Account created",
+      "Detail": "Tatiana joined using MARS000001.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-27T12:12:35.604085+00:00",
+      "Actor": "Admin",
+      "Action": "Enquiry routed (demo)",
+      "Detail": "Enquiry 74330a920e084c0b97a2460e38a69147 assigned to Sarah Mitchell, demo salesperson.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T12:10:17.0170736+00:00",
+      "Actor": "Customer #1",
+      "Action": "Invitation sent (demo)",
+      "Detail": "WhatsApp invitation to Tatiana. Referral ID 4000a42257194a3e970ffc6cd492f652. No external message sent.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T11:53:06.5159717+00:00",
+      "Actor": "Customer #1",
+      "Action": "Customer referred directly",
+      "Detail": "Created a demo account for Peter using MARS000001.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T11:53:06.514285+00:00",
+      "Actor": "Customer #2",
+      "Action": "Account created",
+      "Detail": "Peter joined using MARS000001.",
       "CustomerId": 2
+    },
+    {
+      "At": "2026-09-27T11:48:22.7035332+00:00",
+      "Actor": "Customer #1",
+      "Action": "Invitation sent (demo)",
+      "Detail": "WhatsApp invitation to Sophie Campbell. Referral ID 3e52684e90eb4d48af4e6c7ce2def72d. No external message sent.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T11:23:04.9703814+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1004: Funded.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T09:50:35.7361361+00:00",
+      "Actor": "Admin",
+      "Action": "Enquiry routed (demo)",
+      "Detail": "Enquiry f206e57ecf034dd98957c55a5d8af5df assigned to Sarah Mitchell, demo salesperson.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T08:03:55.1602371+00:00",
+      "Actor": "Customer #1",
+      "Action": "Customer referred directly",
+      "Detail": "Created a demo account for Test using MARS000001.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T07:57:34.510148+00:00",
+      "Actor": "Customer #1",
+      "Action": "Invitation sent (demo)",
+      "Detail": "WhatsApp invitation to Sophie Campbell. Referral ID 595a4f862b234fb790d704f42461ab9a. No external message sent.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T07:51:36.9191805+00:00",
+      "Actor": "Customer #1",
+      "Action": "Invitation sent (demo)",
+      "Detail": "WhatsApp invitation to Sophie Campbell. Referral ID 6c39c07c9e2c4bb0b665ee74c8e6c8f3. No external message sent.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-27T07:37:31.8460681+00:00",
+      "Actor": "Customer #1",
+      "Action": "Invitation sent (demo)",
+      "Detail": "WhatsApp invitation to Sophie Campbell. Referral ID 307230fa6b444d4aa5199b3038b32e7e. No external message sent.",
+      "CustomerId": 1
     },
     {
       "At": "2026-09-24T17:23:16.5524009+00:00",
@@ -275,20 +428,6 @@
       "Action": "Sample enquiry loaded",
       "Detail": "Fictional POC enquiry for William Taylor; status Contacted. No external communication occurred.",
       "CustomerId": 1
-    },
-    {
-      "At": "2026-09-24T17:23:16.5523982+00:00",
-      "Actor": "Admin",
-      "Action": "Sample enquiry loaded",
-      "Detail": "Fictional POC enquiry for Ava Johnson; status New. No external communication occurred.",
-      "CustomerId": 3
-    },
-    {
-      "At": "2026-09-24T17:23:16.5523948+00:00",
-      "Actor": "Admin",
-      "Action": "Sample enquiry loaded",
-      "Detail": "Fictional POC enquiry for Oliver Brooks; status New. No external communication occurred.",
-      "CustomerId": 2
     },
     {
       "At": "2026-09-24T17:23:16.5519932+00:00",
@@ -333,111 +472,6 @@
       "CustomerId": 1
     },
     {
-      "At": "2026-09-18T11:46:43.6325579+00:00",
-      "Actor": "Admin",
-      "Action": "Payout simulated",
-      "Detail": "Reward #2003: paid, reference SEED-2003.",
-      "CustomerId": 5
-    },
-    {
-      "At": "2026-09-18T11:46:43.6298125+00:00",
-      "Actor": "Admin",
-      "Action": "Reward reviewed",
-      "Detail": "Reward #2003: Approved.",
-      "CustomerId": 5
-    },
-    {
-      "At": "2026-09-18T11:46:43.6245483+00:00",
-      "Actor": "Admin",
-      "Action": "Application updated",
-      "Detail": "Application #1003: Funded.",
-      "CustomerId": 5
-    },
-    {
-      "At": "2026-09-18T11:46:43.6245359+00:00",
-      "Actor": "Admin",
-      "Action": "Application updated",
-      "Detail": "Application #1003: Approved.",
-      "CustomerId": 5
-    },
-    {
-      "At": "2026-09-18T11:46:43.6245272+00:00",
-      "Actor": "Admin",
-      "Action": "Application submitted",
-      "Detail": "Application #1003 for Noah Bennett.",
-      "CustomerId": 5
-    },
-    {
-      "At": "2026-09-18T11:46:43.6238699+00:00",
-      "Actor": "Admin",
-      "Action": "Application updated",
-      "Detail": "Application #1002: Funded.",
-      "CustomerId": 4
-    },
-    {
-      "At": "2026-09-18T11:46:43.6237424+00:00",
-      "Actor": "Admin",
-      "Action": "Application updated",
-      "Detail": "Application #1002: Approved.",
-      "CustomerId": 4
-    },
-    {
-      "At": "2026-09-18T11:46:43.6182132+00:00",
-      "Actor": "Admin",
-      "Action": "Application submitted",
-      "Detail": "Application #1002 for Emma Anderson.",
-      "CustomerId": 4
-    },
-    {
-      "At": "2026-09-18T11:46:43.6179519+00:00",
-      "Actor": "Admin",
-      "Action": "Application submitted",
-      "Detail": "Application #1001 for Olivia Martin.",
-      "CustomerId": 2
-    },
-    {
-      "At": "2026-09-18T11:46:43.6157762+00:00",
-      "Actor": "Admin",
-      "Action": "Code status changed",
-      "Detail": "MARS000006: paused. Existing referrals remain attached.",
-      "CustomerId": 6
-    },
-    {
-      "At": "2026-09-18T11:46:43.6130728+00:00",
-      "Actor": "Customer #6",
-      "Action": "Account created",
-      "Detail": "Charlotte Clark joined.",
-      "CustomerId": 6
-    },
-    {
-      "At": "2026-09-18T11:46:43.613064+00:00",
-      "Actor": "Customer #5",
-      "Action": "Account created",
-      "Detail": "Noah Bennett joined using MARS000001.",
-      "CustomerId": 5
-    },
-    {
-      "At": "2026-09-18T11:46:43.6130352+00:00",
-      "Actor": "Customer #4",
-      "Action": "Account created",
-      "Detail": "Emma Anderson joined using MARS000001.",
-      "CustomerId": 4
-    },
-    {
-      "At": "2026-09-18T11:46:43.6128994+00:00",
-      "Actor": "Customer #3",
-      "Action": "Account created",
-      "Detail": "Ethan Wilson joined.",
-      "CustomerId": 3
-    },
-    {
-      "At": "2026-09-18T11:46:43.6072442+00:00",
-      "Actor": "Customer #2",
-      "Action": "Account created",
-      "Detail": "Olivia Martin joined using MARS000001.",
-      "CustomerId": 2
-    },
-    {
       "At": "2026-09-18T11:46:43.5918688+00:00",
       "Actor": "Customer #1",
       "Action": "Account created",
@@ -445,7 +479,68 @@
       "CustomerId": 1
     }
   ],
-  "Invitations": [],
+  "Invitations": [
+    {
+      "Id": "307230fa6b444d4aa5199b3038b32e7e",
+      "ReferrerId": 1,
+      "Recipient": "Sophie Campbell",
+      "Channel": "WhatsApp",
+      "Body": "Hi! Discover how a reverse mortgage could help you make the most of your home. Join through my referral link: you could receive $25 and I could receive $50 after qualifying funding and approval. This is a HomeEquity Bank referral POC demo.",
+      "Status": "Sent",
+      "CreatedAt": "2026-09-27T07:37:31.845295+00:00",
+      "Contact": "\u002B918054082441"
+    },
+    {
+      "Id": "6c39c07c9e2c4bb0b665ee74c8e6c8f3",
+      "ReferrerId": 1,
+      "Recipient": "Sophie Campbell",
+      "Channel": "WhatsApp",
+      "Body": "Hi! Discover how a reverse mortgage could help you make the most of your home. Join through my referral link: you could receive $25 and I could receive $50 after qualifying funding and approval. This is a HomeEquity Bank referral POC demo.",
+      "Status": "Sent",
+      "CreatedAt": "2026-09-27T07:51:36.9186822+00:00",
+      "Contact": "\u002B918054082441"
+    },
+    {
+      "Id": "595a4f862b234fb790d704f42461ab9a",
+      "ReferrerId": 1,
+      "Recipient": "Sophie Campbell",
+      "Channel": "WhatsApp",
+      "Body": "Hi! Discover how a reverse mortgage could help you make the most of your home. Join through my referral link: you could receive $25 and I could receive $50 after qualifying funding and approval. This is a HomeEquity Bank referral POC demo.",
+      "Status": "Sent",
+      "CreatedAt": "2026-09-27T07:57:34.5098797+00:00",
+      "Contact": "\u002B918054082441"
+    },
+    {
+      "Id": "3e52684e90eb4d48af4e6c7ce2def72d",
+      "ReferrerId": 1,
+      "Recipient": "Sophie Campbell",
+      "Channel": "WhatsApp",
+      "Body": "Hi! Discover how a reverse mortgage could help you make the most of your home. Join through my referral link: you could receive $25 and I could receive $50 after qualifying funding and approval. This is a HomeEquity Bank referral POC demo.",
+      "Status": "Sent",
+      "CreatedAt": "2026-09-27T11:48:22.7026927+00:00",
+      "Contact": "\u002B918054082441"
+    },
+    {
+      "Id": "676d686d027141e1aa9f36479c798914",
+      "ReferrerId": 1,
+      "Recipient": "Peter",
+      "Channel": "Direct",
+      "Body": "A direct referral was created for Peter. The referral code MARS000001 is attached to their account.",
+      "Status": "Recorded",
+      "CreatedAt": "2026-09-27T11:53:06.5140617+00:00",
+      "Contact": "peter@gmail.com \u00B7 918054082441"
+    },
+    {
+      "Id": "4000a42257194a3e970ffc6cd492f652",
+      "ReferrerId": 1,
+      "Recipient": "Tatiana",
+      "Channel": "WhatsApp",
+      "Body": "Hi! Discover how a reverse mortgage could help you make the most of your home. Join through my referral link: you could receive $25 and I could receive $50 after qualifying funding and approval. This is a HomeEquity Bank referral POC demo.",
+      "Status": "Sent",
+      "CreatedAt": "2026-09-27T12:10:17.0160967+00:00",
+      "Contact": "\u002B918054082441"
+    }
+  ],
   "Enquiries": [
     {
       "Id": "b046e08ba7fa4d2ca129b8351e61f49b",
@@ -460,30 +555,6 @@
       "CreatedAt": "2026-09-23T17:23:16.5506104+00:00"
     },
     {
-      "Id": "bc2fafb27e974af4bdacb68c35b9c067",
-      "ReferrerId": 2,
-      "InvitationId": null,
-      "Name": "Oliver Brooks",
-      "Email": "oliver.brooks.enquiry@example.com",
-      "Phone": "\u002B1 604 555 0102",
-      "Interest": "Income Solution",
-      "Salesperson": "Sarah Mitchell",
-      "Status": "New",
-      "CreatedAt": "2026-09-22T17:23:16.5506104+00:00"
-    },
-    {
-      "Id": "100bb1ebd99f4c01974b7e56070b5452",
-      "ReferrerId": 3,
-      "InvitationId": null,
-      "Name": "Ava Johnson",
-      "Email": "ava.johnson.enquiry@example.com",
-      "Phone": "\u002B1 613 555 0103",
-      "Interest": "General enquiry",
-      "Salesperson": "Sarah Mitchell",
-      "Status": "New",
-      "CreatedAt": "2026-09-21T17:23:16.5506104+00:00"
-    },
-    {
       "Id": "5dd4ccf45e044ad4a6dec202f411fa42",
       "ReferrerId": 1,
       "InvitationId": null,
@@ -496,16 +567,28 @@
       "CreatedAt": "2026-09-20T17:23:16.5506104+00:00"
     },
     {
-      "Id": "514c7b250a0f4c6daf840eaaa0e608ce",
-      "ReferrerId": 2,
+      "Id": "f206e57ecf034dd98957c55a5d8af5df",
+      "ReferrerId": 1,
       "InvitationId": null,
-      "Name": "Sophie Campbell",
-      "Email": "sophie.campbell.enquiry@example.com",
-      "Phone": "\u002B1 902 555 0105",
-      "Interest": "Income Solution",
+      "Name": "Rajni",
+      "Email": "rajni@gmail.com",
+      "Phone": "8054082441",
+      "Interest": "Reverse mortgage",
       "Salesperson": "Sarah Mitchell",
-      "Status": "Contacted",
-      "CreatedAt": "2026-09-19T17:23:16.5506104+00:00"
+      "Status": "New",
+      "CreatedAt": "2026-09-27T09:50:35.7354992+00:00"
+    },
+    {
+      "Id": "74330a920e084c0b97a2460e38a69147",
+      "ReferrerId": 1,
+      "InvitationId": "4000a42257194a3e970ffc6cd492f652",
+      "Name": "Tatiana",
+      "Email": "tatiana@gmail.com",
+      "Phone": "918054082441",
+      "Interest": "Reverse mortgage",
+      "Salesperson": "Sarah Mitchell",
+      "Status": "New",
+      "CreatedAt": "2026-09-27T12:12:35.6040728+00:00"
     }
   ],
   "PresentationVersion": 1

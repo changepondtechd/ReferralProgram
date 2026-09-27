@@ -6,6 +6,7 @@ internal static class SharingTests {
   static void Reject(Action f){try{f();throw new Exception("Expected rejection");}catch(RuleException){}}
   var ops=new Actor(IsOperations:true);using var s=new ReferralService();
   var a=s.Register("Liam Thompson","liam@example.com",null);var b=s.Register("Olivia Martin","olivia@example.com",null);
+  ReferralTestSetup.Fund(s,a.Id);ReferralTestSetup.Fund(s,b.Id);
   var invite=s.SendInvitation(new(a.Id),a.Id,"Sophie Campbell","WhatsApp","Please explore the referral link below.","+1 (416) 555-0123");
   Check(invite.Contact=="+14165550123");
   Check(ReferralService.NormalizeInvitationContact("LinkedIn","@sophie-campbell")=="https://www.linkedin.com/in/sophie-campbell");

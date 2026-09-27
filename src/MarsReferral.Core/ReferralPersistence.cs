@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace MarsReferral.Core;
@@ -129,7 +129,8 @@ public partial class ReferralService : IDisposable
         Ensure(ValidIds(s.Customers.Select(x => x.Id)) && ValidIds(s.Applications!.Select(x => x.Id)) && ValidIds(s.Rewards!.Select(x => x.Id)) && ValidIds(s.Messages!.Select(x => x.Id)));
         var customerIds = s.Customers.Select(x => x.Id).ToHashSet();
         Ensure(s.Invitations != null && s.Enquiries != null);
-        Ensure(s.Invitations.All(x => x != null && customerIds.Contains(x.ReferrerId) && x.Id.Length == 32 && x.Channel is "WhatsApp" or "LinkedIn" && x.Status is "Sent" or "Delivered"));
+        Ensure(s.Invitations.All(x => x != null && customerIds.Contains(x.ReferrerId) && x.Id.Length == 32 &&
+            ((x.Channel is "WhatsApp" or "LinkedIn" && x.Status is "Sent" or "Delivered") || (x.Channel == "Direct" && x.Status == "Recorded"))));
         Ensure(s.Invitations.Select(x => x.Id).Distinct().Count() == s.Invitations.Length);
         Ensure(s.Enquiries.All(x => x != null && customerIds.Contains(x.ReferrerId) && x.Id.Length == 32 && x.Status is "New" or "Contacted" && (x.InvitationId == null || s.Invitations.Any(i => i.Id == x.InvitationId && i.ReferrerId == x.ReferrerId))));
         Ensure(s.Enquiries.Select(x => x.Id).Distinct().Count() == s.Enquiries.Length);

@@ -1,4 +1,4 @@
-document.querySelectorAll('[data-dialog]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.dialog).showModal()));
+﻿document.querySelectorAll('[data-dialog]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.dialog).showModal()));
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));
 const confirmation = document.createElement('dialog');
 confirmation.innerHTML = '<div class="dialog-heading"><h2>Confirm this step</h2><button type="button" class="icon-button" aria-label="Close confirmation">×</button></div><p></p><div class="actions"><button type="button" class="button" id="confirm-action">Confirm</button><button type="button" class="button secondary" id="cancel-action">Go back</button></div>';
@@ -17,3 +17,38 @@ document.querySelectorAll('[data-copy-url]').forEach(button=>button.addEventList
 document.querySelectorAll('[data-absolute-input]').forEach(input=>input.value=new URL(input.dataset.absoluteInput,location.origin).href);
 document.querySelectorAll('[data-absolute-link]').forEach(el=>el.textContent=new URL(el.dataset.absoluteLink,location.origin).href);
 document.querySelectorAll('[data-print]').forEach(button=>button.addEventListener('click',()=>window.print()));
+
+(() => {
+ const form=document.getElementById('direct-referral-form');if(!form)return;
+ const dialog=form.closest('dialog'), title=document.getElementById('refer-title'), content=document.getElementById('refer-form-content'), success=document.getElementById('refer-confirmation'), errors=document.getElementById('refer-errors');
+ const submit=form.querySelector('[type="submit"]'), closeButtons=dialog.querySelectorAll('[data-close]');
+ let sending=false;
+ const showErrors=messages=>{
+  const list=document.createElement('ul');
+  messages.forEach(message=>{const item=document.createElement('li');item.textContent=message;list.appendChild(item);});
+  errors.replaceChildren(list);errors.classList.remove('validation-summary-valid');errors.classList.add('validation-summary-errors');errors.focus();
+ };
+ dialog.addEventListener('cancel',event=>{if(sending)event.preventDefault();});
+ dialog.addEventListener('close',()=>{if(dialog.dataset.referralComplete==='true')window.location.reload();});
+ form.addEventListener('submit',async event=>{
+  event.preventDefault();if(sending||dialog.dataset.referralComplete==='true')return;
+  sending=true;submit.disabled=true;closeButtons.forEach(button=>button.disabled=true);form.setAttribute('aria-busy','true');
+  const label=submit.textContent;submit.textContent='Sending…';errors.replaceChildren();
+  errors.classList.remove('validation-summary-errors');errors.classList.add('validation-summary-valid');
+  try{
+   const response=await fetch(form.action,{method:'POST',body:new FormData(form),credentials:'same-origin',redirect:'error',headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}});
+   if(!response.headers.get('content-type')?.includes('application/json'))throw new Error('Unexpected response');
+   const result=await response.json();
+   if(response.ok&&result.success===true){
+    dialog.dataset.referralComplete='true';content.hidden=true;success.hidden=false;title.textContent=title.dataset.successTitle;dialog.scrollTop=0;
+   }else{
+    showErrors(Array.isArray(result.errors)&&result.errors.length?result.errors:['Unable to send the invitation. Check your details and try again.']);
+   }
+  }catch{
+   showErrors(['Unable to confirm the invitation. Check your connection and sign-in session, and verify whether the referral was created before trying again.']);
+  }finally{
+   sending=false;submit.disabled=false;submit.textContent=label;closeButtons.forEach(button=>button.disabled=false);form.removeAttribute('aria-busy');
+   if(dialog.dataset.referralComplete==='true')success.querySelector('button').focus();
+  }
+ });
+})();

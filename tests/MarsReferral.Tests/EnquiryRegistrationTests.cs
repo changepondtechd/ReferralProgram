@@ -6,6 +6,7 @@ internal static class EnquiryRegistrationTests
   static void Check(bool ok){if(!ok)throw new Exception("Enquiry registration assertion failed");}
   static void Reject(Action action){try{action();throw new Exception("Expected rejection");}catch(RuleException){}}
   using var s=new ReferralService();var owner=s.Register("Liam Thompson","liam@example.com",null);
+  ReferralTestSetup.Fund(s,owner.Id);
   var result=s.SubmitEnquiryAndRegister(owner.Code,null,"Ava Harper","ava@example.com","+1 416 555 0188","Reverse mortgage",true);
   Check(result.AccountCreated && result.Customer.OnboardingComplete && result.Customer.ReferrerId==owner.Id && result.Customer.Phone=="+1 416 555 0188" && s.Read().Rewards.Length==0);
   Check(result.Enquiry.Email==result.Customer.Email && s.Read().Enquiries.Length==1);
@@ -19,10 +20,11 @@ internal static class EnquiryRegistrationTests
   var existing=s.Register("Olivia Martin","olivia@example.com",null);
   var attached=s.SubmitEnquiryAndRegister(owner.Code,null,existing.Name,existing.Email,"4165550190","General enquiry",true,existing.Id);
   Check(attached.Customer.ReferrerId==owner.Id);
+  ReferralTestSetup.Fund(s,existing.Id);
   var other=s.Register("Ethan Wilson","ethan@example.com",existing.Code);
   var retained=s.SubmitEnquiryAndRegister(owner.Code,null,other.Name,other.Email,"4165550191","General enquiry",true,other.Id);
   Check(retained.ExistingReferralKept && retained.Customer.ReferrerId==existing.Id);
-  var parent=s.Register("Parent Person","parent@example.com",null);var child=s.Register("Child Person","child@example.com",parent.Code);
+  var parent=s.Register("Parent Person","parent@example.com",null);ReferralTestSetup.Fund(s,parent.Id);var child=s.Register("Child Person","child@example.com",parent.Code);ReferralTestSetup.Fund(s,child.Id);
   before=JsonSerializer.Serialize(s.Read());
   Reject(()=>s.SubmitEnquiryAndRegister(child.Code,null,parent.Name,parent.Email,"4165550192","General enquiry",true,parent.Id));
   Reject(()=>s.SubmitEnquiryAndRegister(owner.Code,null,"No Consent","no-consent@example.com","4165550193","General enquiry",false));

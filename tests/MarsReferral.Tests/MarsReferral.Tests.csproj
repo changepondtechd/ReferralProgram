@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\MarsReferral.Core\MarsReferral.Core.csproj" />
+    <ProjectReference Include="..\..\src\MarsReferral.Web\MarsReferral.Web.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

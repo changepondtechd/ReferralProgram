@@ -1,0 +1,13 @@
+@model PortalModel
+@{ var localAddress = Uri.TryCreate($"{Context.Request.Scheme}://{Context.Request.Host}", UriKind.Absolute, out var origin) && origin.IsLoopback; }
+<aside class="referral-qr" aria-labelledby="referral-qr-title">
+ <h3 id="referral-qr-title">Scan to refer</h3>
+ @if(Model.Current is { } customer && Model.CanShare(customer)){
+  <img class="referral-qr-image" src="@Url.Action("ReferralQr", "Customer")" alt="QR code for your personal referral enquiry link" width="240" height="240"/>
+  <p>Share this QR code with a friend. They can scan it with their phone and enter their own details. Your referral code is included automatically.</p>
+  <a class="button small secondary" asp-controller="Customer" asp-action="ReferralQr" asp-route-download="true" download="referral-qr.png">Download QR</a>
+  @if(localAddress){<p class="field-help referral-qr-warning" role="note">This QR uses localhost and will not open on another device. Use a reachable site address before downloading a QR to share.</p>}
+ }else{
+  <p>@Model.SharingUnavailableReason</p>
+ }
+</aside>

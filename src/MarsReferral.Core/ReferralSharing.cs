@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 namespace MarsReferral.Core;
 public record Invitation(string Id, int ReferrerId, string Recipient, string Channel, string Body, string Status, DateTimeOffset CreatedAt) { public string Contact { get; init; } = ""; }
@@ -39,7 +39,7 @@ public partial class ReferralService
     public Customer ReferralOwner(string? code) { lock(gate) return ValidateCode(code, null); }
     public Invitation SendInvitation(Actor actor, int referrerId, string? recipient, string? channel, string? body, string? contact = null) => Mutate(() => {
         Access(actor, referrerId); var owner = Find(referrerId);
-        Require(owner.OnboardingComplete && owner.CodeActive, "Choose a customer with completed onboarding and an active referral code.");
+        RequireReferralEligibility(owner);
         recipient = recipient?.Trim() ?? ""; body = body?.Trim() ?? "";
         Require(recipient.Length is >= 2 and <= 80 && !recipient.Any(char.IsControl), "Enter a recipient name of 2 to 80 characters.");
         Require(channel is "WhatsApp" or "LinkedIn", "Choose WhatsApp or LinkedIn.");
@@ -76,7 +76,8 @@ public partial class ReferralService
     }
     public void DeliverInvitation(Actor actor, string id) => Mutate(() => {
         var i = invitations.SingleOrDefault(x => x.Id == id) ?? throw new RuleException("Invitation was not found.");
-        Access(actor,i.ReferrerId); Require(i.Status == "Sent", "This invitation has already been delivered in the demo.");
+        Access(actor,i.ReferrerId);
+        Require(i.Channel is "WhatsApp" or "LinkedIn" && i.Status == "Sent", "Only sent WhatsApp or LinkedIn invitations can be delivered in the demo.");
         invitations[invitations.IndexOf(i)] = i with { Status = "Delivered" };
         Log(actor,"Invitation delivered (demo)",$"Referral ID {id} delivered to {i.Recipient} in the simulated recipient view.",i.ReferrerId);
     });

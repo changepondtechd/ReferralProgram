@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.8.0" />
     <ProjectReference Include="..\MarsReferral.Core\MarsReferral.Core.csproj" />
   </ItemGroup>
 

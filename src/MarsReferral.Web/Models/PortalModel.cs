@@ -6,6 +6,8 @@ public record PortalModel(Snapshot Data, Actor Actor, string Query = "", string 
     public Pagination Pagination { get; init; } = new(0, 1, 10);
     public bool IsOperations => Actor.IsOperations;
     public Customer? Current => Data.Customers.SingleOrDefault(x => x.Id == Actor.CustomerId);
+    public bool CanShare(Customer customer) => ReferralEligibility.CanShare(customer, Data.Applications);
+    public string? SharingUnavailableReason => Current is { } customer ? ReferralEligibility.UnavailableReason(customer, Data.Applications) : null;
     public string Name(int id) => Data.Customers.SingleOrDefault(x => x.Id == id)?.Name ?? "Customer";
     public string Initials(string name) => string.Concat(name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(x => x[0]));
 }

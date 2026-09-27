@@ -1,8 +1,9 @@
-using MarsReferral.Core;
+﻿using MarsReferral.Core;
 using MarsReferral.Web.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using QRCoder;
 
 namespace MarsReferral.Web.Controllers;
 [Route("customer")]
@@ -15,6 +16,21 @@ public class CustomerController(ReferralService service) : PortalBase(service)
     [HttpPost("sharing/send")] public IActionResult Send(ShareInput input) => SendSharing(input);
     [HttpPost("sharing/deliver")] public IActionResult Deliver(string id) => DeliverSharing(id);
     [HttpGet("")] public IActionResult Index() => Page("Index");
+    [HttpGet("referral/qr")]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+    public IActionResult ReferralQr(bool download = false)
+    {
+        var snapshot = Service.Read();
+        var customer = snapshot.Customers.SingleOrDefault(x => x.Id == CurrentActor.CustomerId);
+        if (customer == null || !customer.OnboardingComplete) return NotFound();
+        if (ReferralEligibility.UnavailableReason(customer, snapshot.Applications) is { } reason) return BadRequest(reason);
+        var link = Url.Action("Index", "Referral", new { code = customer.Code }, Request.Scheme, Request.Host.Value);
+        if (string.IsNullOrEmpty(link)) return StatusCode(StatusCodes.Status500InternalServerError);
+        using var data = QRCodeGenerator.GenerateQrCode(link, QRCodeGenerator.ECCLevel.Q);
+        using var qr = new PngByteQRCode(data);
+        var image = qr.GetGraphic(8);
+        return download ? File(image, "image/png", "referral-qr.png") : File(image, "image/png");
+    }
     [AllowAnonymous, HttpGet("login")] public IActionResult Login() => View(Service.Read().Customers);
     [AllowAnonymous, HttpPost("login")] public async Task<IActionResult> Enter(int customerId)
     {
@@ -33,19 +49,33 @@ public class CustomerController(ReferralService service) : PortalBase(service)
     }
     [HttpGet("applications")] public IActionResult Applications(string? q, string? status) => Page("Applications", q, status);
     [HttpGet("rewards")] public IActionResult Rewards(string? status) => Page("Rewards", status: status);
+    [HttpGet("messages")]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+    public IActionResult Messages(int page = 1, int pageSize = 10)
+    {
+        var model = Build();
+        var paging = new Pagination(model.Data.Invitations.Length, page, pageSize);
+        var data = model.Data with { Invitations = model.Data.Invitations.OrderByDescending(x => x.CreatedAt)
+            .ThenByDescending(x => x.Id).Skip(paging.Skip).Take(paging.PageSize).ToArray() };
+        return View("~/Views/Portal/Messages.cshtml", model with { Data = data, Pagination = paging });
+    }
     [HttpGet("inbox")] public IActionResult Inbox(int page = 1, int pageSize = 10) => Records("Inbox", page, pageSize);
     [HttpGet("activity")] public IActionResult Activity(int page = 1, int pageSize = 10) => Records("Activity", page, pageSize);
     [HttpGet("heb")] public IActionResult Heb() => Page("Heb");
     [HttpPost("referral/create")] public IActionResult Refer(ReferInput input)
     {
+        var asynchronous = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
         if (ModelState.IsValid)
         {
             try {
-                var customer = Service.Refer(CurrentActor, input.Name, input.Email, input.Phone);
-                TempData["Success"] = $"{customer.Name}'s demo account is ready! They can select their name on Customer sign-in. Your referral code is attached. No email or SMS has been sent.";
+                Service.Refer(CurrentActor, input.Name, input.Email, input.Phone);
+                if (asynchronous) return Json(new { success = true });
+                TempData["DirectReferralShared"] = true;
                 return RedirectToAction(nameof(Index));
             } catch (RuleException ex) { ModelState.AddModelError("", ex.Message); }
         }
+        if (asynchronous) return BadRequest(new { errors = ModelState.Values.SelectMany(x => x.Errors)
+            .Select(x => string.IsNullOrEmpty(x.ErrorMessage) ? "Check the submitted referral details." : x.ErrorMessage).ToArray() });
         ViewData["ReferInput"] = input;
         ViewData["OpenReferral"] = true;
         return Page("Index");

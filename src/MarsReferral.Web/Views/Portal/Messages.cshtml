@@ -1,0 +1,17 @@
+@model PortalModel
+@{ ViewData["Title"] = "Messages"; }
+<partial name="_RecordTableStyles" />
+<div class="page-heading"><div><span class="eyebrow">YOUR REFERRAL HISTORY</span><h1>Messages</h1><p>Invitations and direct referrals you created, newest first.</p></div><span class="badge neutral">@Model.Pagination.Total records</span></div>
+<p class="field-help">All messaging is simulated. New direct invitations do not create accounts or send email or SMS. Share the invitation link below so your friend can enter their own details and consent to register. Older entries describe the referral activity recorded at that time.</p>
+<section class="panel records-panel">
+<div class="table-scroll" role="region" aria-label="Sent referral messages" tabindex="0">
+<table class="records-table"><caption class="sr-only">Your referral messages and direct referrals, newest first</caption><thead><tr><th scope="col">Date (UTC)</th><th scope="col">Recipient</th><th scope="col">Channel</th><th scope="col">Message &amp; referral link</th><th scope="col">Status</th></tr></thead><tbody>
+@foreach(var message in Model.Data.Invitations){
+ var direct = message.Channel == "Direct";
+ var link = Url.Action("Index", "Referral", new { code = Model.Current!.Code, invitationId = message.Id }, Context.Request.Scheme, Context.Request.Host.Value);
+ <tr><td class="record-date"><time datetime="@message.CreatedAt.ToString("O")">@message.CreatedAt.UtcDateTime.ToString("dd MMM yyyy, HH:mm:ss")</time></td><td><strong>@message.Recipient</strong><small>@(string.IsNullOrEmpty(message.Contact) ? "Contact not recorded" : message.Contact)</small></td><td>@(direct ? "Direct referral" : message.Channel)</td><td class="record-detail"><strong>@(direct ? "Referral details" : "Message")</strong><p class="preserve-lines">@message.Body</p><a class="record-guide" href="@link">@link</a>@if(!Model.Current.CodeActive){<small>This referral code is currently paused.</small>}</td><td><span class="badge @(direct ? "neutral" : "good")">@message.Status@(direct ? "" : " (demo)")</span></td></tr>
+}
+@if(Model.Data.Invitations.Length == 0){<tr><td colspan="5" class="empty">No messages yet. Send a WhatsApp or LinkedIn invitation, or refer someone directly, to see it here.</td></tr>}
+</tbody></table></div>
+<partial name="_Pagination" model="Model.Pagination" />
+</section>

@@ -1,4 +1,4 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using MarsReferral.Core;
 using MarsReferral.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -44,17 +44,18 @@ public abstract class PortalBase(ReferralService service) : Controller
     }
     protected IActionResult SharingPage(ShareInput? input = null, string? id = null) {
         var portal = Build();
+        portal = portal with { Data = portal.Data with { Invitations = portal.Data.Invitations.Where(x => x.Channel is "WhatsApp" or "LinkedIn").ToArray() } };
         var active = portal.Data.Invitations.SingleOrDefault(x => x.Id == id);
         if (id != null && active == null) return NotFound();
         if(input == null && active != null) input = new ShareInput {CustomerId=active.ReferrerId,Recipient=active.Recipient,Channel=active.Channel,Body=active.Body,Contact=active.Contact};
-        input ??= new ShareInput { CustomerId = portal.IsOperations ? portal.Data.Customers.FirstOrDefault(x=>x.CodeActive && x.OnboardingComplete)?.Id ?? 0 : CurrentActor.CustomerId };
+        input ??= new ShareInput { CustomerId = portal.IsOperations ? portal.Data.Customers.FirstOrDefault(portal.CanShare)?.Id ?? 0 : CurrentActor.CustomerId };
         return View("~/Views/Portal/Sharing.cshtml",new SharingModel(portal,input,active));
     }
     protected IActionResult SendSharing(ShareInput input) {
         if(!CurrentActor.IsOperations) input.CustomerId = CurrentActor.CustomerId;
         if(ModelState.IsValid) try {
             var invite = Service.SendInvitation(CurrentActor,input.CustomerId,input.Recipient,input.Channel,input.Body,input.Contact);
-            TempData["Success"] = $"Referral link sent to {invite.Recipient} via {invite.Channel} (demo). No external message was sent.";
+            TempData["ReferralShared"] = true;
             return RedirectToAction("Sharing",new {id=invite.Id});
         } catch(RuleException e) { ModelState.AddModelError("",e.Message); }
         return SharingPage(input);

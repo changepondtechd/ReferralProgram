@@ -1,13 +1,24 @@
-@model SharingModel
-@{ ViewData["Title"]="Sharing demo"; var portal=Model.Portal; var candidates=portal.Data.Customers.Where(x=>x.CodeActive && x.OnboardingComplete && (portal.IsOperations || x.Id==portal.Actor.CustomerId)).ToArray(); var sender=candidates.SingleOrDefault(x=>x.Id==Model.Input.CustomerId); var controller=portal.IsOperations?"Admin":"Customer"; }
-<div class="page-heading"><div><span class="eyebrow">CUSTOMER-TO-CUSTOMER REFERRALS</span><h1>A thoughtful invitation.</h1><p>Compose, preview and follow a referral from message to enquiry.</p></div><span class="demo-pill">SIMULATION ONLY</span></div>
+﻿@model SharingModel
+@{ ViewData["Title"]="Sharing demo"; var portal=Model.Portal; var candidates=portal.Data.Customers.Where(x=>portal.CanShare(x) && (portal.IsOperations || x.Id==portal.Actor.CustomerId)).ToArray(); var sender=candidates.SingleOrDefault(x=>x.Id==Model.Input.CustomerId); var controller=portal.IsOperations?"Admin":"Customer"; }
+@if(TempData["ReferralShared"] is true){
+<dialog id="referral-shared-dialog" class="refer-dialog" aria-labelledby="referral-shared-title" aria-describedby="referral-shared-message" data-open-on-load="true">
+ <div class="dialog-heading"><h2 id="referral-shared-title">Thanks for referring your friend!</h2><button type="button" class="icon-button" data-close aria-label="Close referral confirmation">×</button></div>
+ <p id="referral-shared-message">Your referral link has been shared with your friend, and our executive will connect with them soon.</p>
+ <div class="actions"><button type="button" class="button" data-close autofocus>OK</button></div>
+</dialog>
+}
+<div class="page-heading"><div><span class="eyebrow">Customer-to-Customer REFERRALS</span><h1>A thoughtful invitation.</h1><p>Compose, preview and follow a referral from message to enquiry.</p></div><span class="demo-pill">SIMULATION ONLY</span></div>
 @if(Model.Active!=null){<p><a class="button secondary" href="#recipient-preview">View recipient message &amp; landing page ↓</a></p>}
 <div class="sharing-grid">
 <section class="panel"><h2>1. Compose an invitation</h2><p class="field-help">WhatsApp and LinkedIn are visual demos. Nothing is sent to either platform.</p>
 <form asp-controller="@controller" asp-action="Send" method="post" id="share-composer">
 <div asp-validation-summary="All" class="validation" role="alert"></div>
+@if(portal.IsOperations){
 <label for="share-customer">Referring customer</label><select id="share-customer" name="CustomerId" required>@foreach(var person in candidates){<option value="@person.Id" data-code="@person.Code" data-name="@person.Name" selected="@(person.Id==Model.Input.CustomerId)">@person.Name</option>}</select>
-@if(!candidates.Any()){<p class="validation">An active referral code and completed onboarding are required to share.</p>}
+}else{
+<input type="hidden" id="share-customer" name="CustomerId" value="@portal.Actor.CustomerId" data-code="@sender?.Code" data-name="@portal.Current?.Name"/>
+}
+@if(!candidates.Any()){<p class="validation">@(portal.SharingUnavailableReason ?? "A customer with an active referral code and completed onboarding is required to share.")</p>}
 <label for="share-recipient">Recipient name</label><input id="share-recipient" name="Recipient" value="@Model.Input.Recipient" list="demo-recipients" required minlength="2" maxlength="80"/><datalist id="demo-recipients"><option>Sophie Campbell</option><option>Oliver Brooks</option><option>Grace Miller</option></datalist>
 <label for="share-channel">Channel</label><select id="share-channel" name="Channel"><option selected="@(Model.Input.Channel=="WhatsApp")">WhatsApp</option><option selected="@(Model.Input.Channel=="LinkedIn")">LinkedIn</option></select>
 <label id="share-contact-label" for="share-contact">@(Model.Input.Channel=="LinkedIn"?"LinkedIn ID or profile link":"WhatsApp number")</label>
@@ -15,12 +26,12 @@
 <p class="field-help" id="share-contact-help">@(Model.Input.Channel=="LinkedIn"?"Paste a LinkedIn profile ID or an HTTPS /in/ profile link.":"Include the country code. Use 10 to 15 digits.")</p>
 <label for="share-body">Your message</label><textarea id="share-body" name="Body" rows="6" required minlength="10" maxlength="1200">@Model.Input.Body</textarea>
 <label for="share-link">Referral link (added automatically)</label><input id="share-link" readonly value="@Url.Action("Index","Referral",new {code=sender?.Code})"/><p class="field-help">Each simulated send creates its own tracked invitation link.</p>
-<button class="button full" type="submit" disabled="@(!candidates.Any())">Send</button></form></section>
+<button class="button small" type="submit" disabled="@(!candidates.Any())">Send Invitation</button></form></section>
 <section class="panel"><h2>2. Live message preview</h2><div class="message-preview" id="message-preview"><div class="preview-channel" id="preview-channel">WhatsApp · Demo</div><div class="preview-person"><span class="preview-avatar">●</span><div><strong id="preview-sender">@sender?.Name</strong><small>To <strong id="preview-recipient">@Model.Input.Recipient</strong></small><small id="preview-contact">@Model.Input.Contact</small></div></div><div class="preview-bubble"><p id="preview-body">@Model.Input.Body</p><div class="link-preview"><img class="heb-preview-logo" src="/images/brand/homeequity-bank-dark.svg" alt="HomeEquity Bank" width="240" height="41"/><span>HOMEEQUITY BANK / REFERRAL POC</span><strong>A little introduction. A shared reward.</strong><p>Explore reverse mortgage options and request a follow-up.</p><span id="preview-link"></span></div><small>Preview only · Not sent</small></div></div><p class="field-help">The preview uses your message and customer referral code. It is not connected to a real social account.</p></section></div>
 @if(Model.Active is { } invite){var owner=portal.Data.Customers.Single(x=>x.Id==invite.ReferrerId);var landing=Url.Action("Index","Referral",new{code=owner.Code,invitationId=invite.Id});
 <section class="panel recipient-panel" id="recipient-preview"><div class="section-heading"><div><span class="eyebrow">3. RECIPIENT EXPERIENCE</span><h2><strong>@invite.Recipient</strong>'s invitation</h2></div><span class="badge good">@invite.Status (demo)</span></div>
 <p>From <strong>@owner.Name</strong> via <strong>@invite.Channel</strong>. Referral ID: <code>@invite.Id[..8].ToUpperInvariant()</code></p><p><strong>@(invite.Channel=="WhatsApp"?"WhatsApp number":"LinkedIn profile"):</strong> @(string.IsNullOrEmpty(invite.Contact)?"Not recorded in this earlier demo invitation":invite.Contact)</p>
 <div class="message-preview @(invite.Channel=="LinkedIn"?"linkedin":"")"><div class="preview-channel">@invite.Channel · Simulated recipient view</div><div class="preview-bubble"><p class="preserve-lines">@PersonNames.Bold(invite.Body,portal.Data)</p><a href="@landing" class="link-preview"><img class="heb-preview-logo" src="/images/brand/homeequity-bank-dark.svg" alt="HomeEquity Bank" width="240" height="41"/><span>HOMEEQUITY BANK / REFERRAL POC</span><strong>Explore your options with a friendly introduction.</strong><p>Request a follow-up. Your referral is tracked automatically.</p><span data-absolute-link="@landing">@landing</span></a><small>@(invite.Status=="Delivered"?"✓✓ Delivered (demo)":"✓ Sent (demo)")</small></div></div>
-<div class="actions">@if(invite.Status=="Sent"){<form asp-controller="@controller" asp-action="Deliver" method="post"><input type="hidden" name="id" value="@invite.Id"/><button class="button secondary">Simulate delivery</button></form>}<a class="button" href="@landing">Open recipient landing page →</a><button class="button secondary" type="button" data-copy-url="@landing">Copy tracked link</button></div></section>}
+</section>}
 <section class="panel"><h2>Invitation history</h2><div class="table-scroll"><table><thead><tr><th>Recipient</th><th>Channel / contact</th><th>Status</th><th>View</th></tr></thead><tbody>@foreach(var history in portal.Data.Invitations.OrderByDescending(x=>x.CreatedAt)){<tr><td><strong>@history.Recipient</strong></td><td>@history.Channel<small>@(string.IsNullOrEmpty(history.Contact)?"Not recorded (earlier demo)":history.Contact)</small></td><td>@history.Status (demo)</td><td><a asp-action="Sharing" asp-route-id="@history.Id">Recipient preview →</a></td></tr>}</tbody></table></div>@if(portal.Data.Invitations.Length==0){<p>No invitations yet. Compose your first demo message above.</p>}</section>
 @section Scripts{<script src="~/js/sharing.js" asp-append-version="true"></script>}
