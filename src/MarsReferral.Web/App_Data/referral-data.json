@@ -1,0 +1,512 @@
+{
+  "Customers": [
+    {
+      "Id": 1,
+      "Name": "Liam Thompson",
+      "Email": "liam.thompson@example.com",
+      "Code": "MARS000001",
+      "CodeActive": true,
+      "ReferrerId": null,
+      "AttachedAt": null,
+      "JoinedAt": "2026-09-18T11:46:43.590963+00:00",
+      "OnboardingComplete": true,
+      "Phone": ""
+    },
+    {
+      "Id": 2,
+      "Name": "Olivia Martin",
+      "Email": "olivia.martin@example.com",
+      "Code": "MARS000002",
+      "CodeActive": true,
+      "ReferrerId": 1,
+      "AttachedAt": "2026-09-18T11:46:43.6060367+00:00",
+      "JoinedAt": "2026-09-18T11:46:43.6060367+00:00",
+      "OnboardingComplete": true,
+      "Phone": ""
+    },
+    {
+      "Id": 3,
+      "Name": "Ethan Wilson",
+      "Email": "ethan.wilson@example.com",
+      "Code": "MARS000003",
+      "CodeActive": true,
+      "ReferrerId": null,
+      "AttachedAt": null,
+      "JoinedAt": "2026-09-18T11:46:43.6128905+00:00",
+      "OnboardingComplete": true,
+      "Phone": ""
+    },
+    {
+      "Id": 4,
+      "Name": "Emma Anderson",
+      "Email": "emma.anderson@example.com",
+      "Code": "MARS000004",
+      "CodeActive": true,
+      "ReferrerId": 1,
+      "AttachedAt": "2026-09-18T11:46:43.6130322+00:00",
+      "JoinedAt": "2026-09-18T11:46:43.6130322+00:00",
+      "OnboardingComplete": true,
+      "Phone": ""
+    },
+    {
+      "Id": 5,
+      "Name": "Noah Bennett",
+      "Email": "noah.bennett@example.com",
+      "Code": "MARS000005",
+      "CodeActive": true,
+      "ReferrerId": 1,
+      "AttachedAt": "2026-09-18T11:46:43.6130618+00:00",
+      "JoinedAt": "2026-09-18T11:46:43.6130618+00:00",
+      "OnboardingComplete": true,
+      "Phone": ""
+    },
+    {
+      "Id": 6,
+      "Name": "Charlotte Clark",
+      "Email": "charlotte.clark@example.com",
+      "Code": "MARS000006",
+      "CodeActive": false,
+      "ReferrerId": null,
+      "AttachedAt": null,
+      "JoinedAt": "2026-09-18T11:46:43.613072+00:00",
+      "OnboardingComplete": true,
+      "Phone": ""
+    }
+  ],
+  "Applications": [
+    {
+      "Id": 1001,
+      "CustomerId": 2,
+      "Purpose": "Home purchase",
+      "Amount": 240000,
+      "Stage": "Submitted",
+      "CreatedAt": "2026-09-18T11:46:43.6176862+00:00",
+      "FundedAt": null,
+      "ApprovedAmount": null
+    },
+    {
+      "Id": 1002,
+      "CustomerId": 4,
+      "Purpose": "Refinance",
+      "Amount": 185000,
+      "Stage": "Funded",
+      "CreatedAt": "2026-09-18T11:46:43.6182109+00:00",
+      "FundedAt": "2026-09-18T11:46:43.623774+00:00",
+      "ApprovedAmount": 185000
+    },
+    {
+      "Id": 1003,
+      "CustomerId": 5,
+      "Purpose": "Home improvement",
+      "Amount": 45000,
+      "Stage": "Funded",
+      "CreatedAt": "2026-09-18T11:46:43.624525+00:00",
+      "FundedAt": "2026-09-18T11:46:43.6245473+00:00",
+      "ApprovedAmount": 45000
+    },
+    {
+      "Id": 1004,
+      "CustomerId": 1,
+      "Purpose": "Home purchase",
+      "Amount": 320000,
+      "Stage": "Approved",
+      "CreatedAt": "2026-09-18T11:46:43.6327319+00:00",
+      "FundedAt": null,
+      "ApprovedAmount": 320000
+    }
+  ],
+  "Rewards": [
+    {
+      "Id": 2001,
+      "BeneficiaryId": 4,
+      "ReferredId": 4,
+      "ApplicationId": 1002,
+      "Kind": "Welcome bonus",
+      "Amount": 25,
+      "Stage": "Pending",
+      "Note": "",
+      "Reference": ""
+    },
+    {
+      "Id": 2002,
+      "BeneficiaryId": 1,
+      "ReferredId": 4,
+      "ApplicationId": 1002,
+      "Kind": "Referral bonus",
+      "Amount": 50,
+      "Stage": "Approved",
+      "Note": "",
+      "Reference": ""
+    },
+    {
+      "Id": 2003,
+      "BeneficiaryId": 5,
+      "ReferredId": 5,
+      "ApplicationId": 1003,
+      "Kind": "Welcome bonus",
+      "Amount": 25,
+      "Stage": "Paid",
+      "Note": "Demo payment confirmed",
+      "Reference": "SEED-2003"
+    },
+    {
+      "Id": 2004,
+      "BeneficiaryId": 1,
+      "ReferredId": 5,
+      "ApplicationId": 1003,
+      "Kind": "Referral bonus",
+      "Amount": 50,
+      "Stage": "Paid",
+      "Note": "Demo payment confirmed",
+      "Reference": "SEED-2004"
+    }
+  ],
+  "Messages": [
+    {
+      "Id": 1,
+      "CustomerId": 2,
+      "Title": "Referral attached",
+      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
+      "CreatedAt": "2026-09-18T11:46:43.6075645+00:00"
+    },
+    {
+      "Id": 2,
+      "CustomerId": 4,
+      "Title": "Referral attached",
+      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
+      "CreatedAt": "2026-09-18T11:46:43.6130359+00:00"
+    },
+    {
+      "Id": 3,
+      "CustomerId": 5,
+      "Title": "Referral attached",
+      "Body": "You joined through Liam Thompson. Complete a new eligible funding event to enter reward review. Demo welcome benefit: $25 CAD.",
+      "CreatedAt": "2026-09-18T11:46:43.6130649+00:00"
+    },
+    {
+      "Id": 4,
+      "CustomerId": 4,
+      "Title": "Your funding is complete",
+      "Body": "Your account credit is confirmed in this simulation. Invite a friend using MARS000004. Visit the referral guide to explore the demo benefit and conditions. No message was sent externally.",
+      "CreatedAt": "2026-09-18T11:46:43.6241853+00:00"
+    },
+    {
+      "Id": 5,
+      "CustomerId": 4,
+      "Title": "Reward under review",
+      "Body": "Your $25 welcome reward is awaiting operations approval.",
+      "CreatedAt": "2026-09-18T11:46:43.6245098+00:00"
+    },
+    {
+      "Id": 6,
+      "CustomerId": 1,
+      "Title": "A friend reached funding",
+      "Body": "Emma Anderson reached qualifying funding. Your $50 referral reward is under review.",
+      "CreatedAt": "2026-09-18T11:46:43.624511+00:00"
+    },
+    {
+      "Id": 7,
+      "CustomerId": 5,
+      "Title": "Your funding is complete",
+      "Body": "Your account credit is confirmed in this simulation. Invite a friend using MARS000005. Visit the referral guide to explore the demo benefit and conditions. No message was sent externally.",
+      "CreatedAt": "2026-09-18T11:46:43.62455+00:00"
+    },
+    {
+      "Id": 8,
+      "CustomerId": 5,
+      "Title": "Reward under review",
+      "Body": "Your $25 welcome reward is awaiting operations approval.",
+      "CreatedAt": "2026-09-18T11:46:43.62471+00:00"
+    },
+    {
+      "Id": 9,
+      "CustomerId": 1,
+      "Title": "A friend reached funding",
+      "Body": "Noah Bennett reached qualifying funding. Your $50 referral reward is under review.",
+      "CreatedAt": "2026-09-18T11:46:43.6247107+00:00"
+    },
+    {
+      "Id": 10,
+      "CustomerId": 5,
+      "Title": "Reward approved",
+      "Body": "Your welcome bonus of $25 CAD was approved. ",
+      "CreatedAt": "2026-09-18T11:46:43.6306366+00:00"
+    },
+    {
+      "Id": 11,
+      "CustomerId": 5,
+      "Title": "Reward paid",
+      "Body": "Your $25 CAD were paid in the demo. Reference: SEED-2003.",
+      "CreatedAt": "2026-09-18T11:46:43.6325898+00:00"
+    },
+    {
+      "Id": 12,
+      "CustomerId": 1,
+      "Title": "Reward approved",
+      "Body": "Your referral bonus of $50 CAD was approved. ",
+      "CreatedAt": "2026-09-18T11:46:43.6326187+00:00"
+    },
+    {
+      "Id": 13,
+      "CustomerId": 1,
+      "Title": "Reward paid",
+      "Body": "Your $50 CAD were paid in the demo. Reference: SEED-2004.",
+      "CreatedAt": "2026-09-18T11:46:43.6327171+00:00"
+    },
+    {
+      "Id": 14,
+      "CustomerId": 1,
+      "Title": "Reward approved",
+      "Body": "Your referral bonus of $50 CAD was approved. ",
+      "CreatedAt": "2026-09-18T11:50:44.3092719+00:00"
+    }
+  ],
+  "Audit": [
+    {
+      "At": "2026-09-24T17:23:16.5524044+00:00",
+      "Actor": "Admin",
+      "Action": "Sample enquiry loaded",
+      "Detail": "Fictional POC enquiry for Sophie Campbell; status Contacted. No external communication occurred.",
+      "CustomerId": 2
+    },
+    {
+      "At": "2026-09-24T17:23:16.5524009+00:00",
+      "Actor": "Admin",
+      "Action": "Sample enquiry loaded",
+      "Detail": "Fictional POC enquiry for William Taylor; status Contacted. No external communication occurred.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-24T17:23:16.5523982+00:00",
+      "Actor": "Admin",
+      "Action": "Sample enquiry loaded",
+      "Detail": "Fictional POC enquiry for Ava Johnson; status New. No external communication occurred.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-24T17:23:16.5523948+00:00",
+      "Actor": "Admin",
+      "Action": "Sample enquiry loaded",
+      "Detail": "Fictional POC enquiry for Oliver Brooks; status New. No external communication occurred.",
+      "CustomerId": 2
+    },
+    {
+      "At": "2026-09-24T17:23:16.5519932+00:00",
+      "Actor": "Admin",
+      "Action": "Sample enquiry loaded",
+      "Detail": "Fictional POC enquiry for Grace Miller; status New. No external communication occurred.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-18T11:50:44.3078763+00:00",
+      "Actor": "Admin",
+      "Action": "Reward reviewed",
+      "Detail": "Reward #2002: Approved.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-18T11:46:43.6327533+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1004: Approved.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-18T11:46:43.6327433+00:00",
+      "Actor": "Admin",
+      "Action": "Application submitted",
+      "Detail": "Application #1004 for Liam Thompson.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-18T11:46:43.6327147+00:00",
+      "Actor": "Admin",
+      "Action": "Payout simulated",
+      "Detail": "Reward #2004: paid, reference SEED-2004.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-18T11:46:43.6326125+00:00",
+      "Actor": "Admin",
+      "Action": "Reward reviewed",
+      "Detail": "Reward #2004: Approved.",
+      "CustomerId": 1
+    },
+    {
+      "At": "2026-09-18T11:46:43.6325579+00:00",
+      "Actor": "Admin",
+      "Action": "Payout simulated",
+      "Detail": "Reward #2003: paid, reference SEED-2003.",
+      "CustomerId": 5
+    },
+    {
+      "At": "2026-09-18T11:46:43.6298125+00:00",
+      "Actor": "Admin",
+      "Action": "Reward reviewed",
+      "Detail": "Reward #2003: Approved.",
+      "CustomerId": 5
+    },
+    {
+      "At": "2026-09-18T11:46:43.6245483+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1003: Funded.",
+      "CustomerId": 5
+    },
+    {
+      "At": "2026-09-18T11:46:43.6245359+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1003: Approved.",
+      "CustomerId": 5
+    },
+    {
+      "At": "2026-09-18T11:46:43.6245272+00:00",
+      "Actor": "Admin",
+      "Action": "Application submitted",
+      "Detail": "Application #1003 for Noah Bennett.",
+      "CustomerId": 5
+    },
+    {
+      "At": "2026-09-18T11:46:43.6238699+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1002: Funded.",
+      "CustomerId": 4
+    },
+    {
+      "At": "2026-09-18T11:46:43.6237424+00:00",
+      "Actor": "Admin",
+      "Action": "Application updated",
+      "Detail": "Application #1002: Approved.",
+      "CustomerId": 4
+    },
+    {
+      "At": "2026-09-18T11:46:43.6182132+00:00",
+      "Actor": "Admin",
+      "Action": "Application submitted",
+      "Detail": "Application #1002 for Emma Anderson.",
+      "CustomerId": 4
+    },
+    {
+      "At": "2026-09-18T11:46:43.6179519+00:00",
+      "Actor": "Admin",
+      "Action": "Application submitted",
+      "Detail": "Application #1001 for Olivia Martin.",
+      "CustomerId": 2
+    },
+    {
+      "At": "2026-09-18T11:46:43.6157762+00:00",
+      "Actor": "Admin",
+      "Action": "Code status changed",
+      "Detail": "MARS000006: paused. Existing referrals remain attached.",
+      "CustomerId": 6
+    },
+    {
+      "At": "2026-09-18T11:46:43.6130728+00:00",
+      "Actor": "Customer #6",
+      "Action": "Account created",
+      "Detail": "Charlotte Clark joined.",
+      "CustomerId": 6
+    },
+    {
+      "At": "2026-09-18T11:46:43.613064+00:00",
+      "Actor": "Customer #5",
+      "Action": "Account created",
+      "Detail": "Noah Bennett joined using MARS000001.",
+      "CustomerId": 5
+    },
+    {
+      "At": "2026-09-18T11:46:43.6130352+00:00",
+      "Actor": "Customer #4",
+      "Action": "Account created",
+      "Detail": "Emma Anderson joined using MARS000001.",
+      "CustomerId": 4
+    },
+    {
+      "At": "2026-09-18T11:46:43.6128994+00:00",
+      "Actor": "Customer #3",
+      "Action": "Account created",
+      "Detail": "Ethan Wilson joined.",
+      "CustomerId": 3
+    },
+    {
+      "At": "2026-09-18T11:46:43.6072442+00:00",
+      "Actor": "Customer #2",
+      "Action": "Account created",
+      "Detail": "Olivia Martin joined using MARS000001.",
+      "CustomerId": 2
+    },
+    {
+      "At": "2026-09-18T11:46:43.5918688+00:00",
+      "Actor": "Customer #1",
+      "Action": "Account created",
+      "Detail": "Liam Thompson joined.",
+      "CustomerId": 1
+    }
+  ],
+  "Invitations": [],
+  "Enquiries": [
+    {
+      "Id": "b046e08ba7fa4d2ca129b8351e61f49b",
+      "ReferrerId": 1,
+      "InvitationId": null,
+      "Name": "Grace Miller",
+      "Email": "grace.miller.enquiry@example.com",
+      "Phone": "\u002B1 416 555 0101",
+      "Interest": "Reverse mortgage",
+      "Salesperson": "Sarah Mitchell",
+      "Status": "New",
+      "CreatedAt": "2026-09-23T17:23:16.5506104+00:00"
+    },
+    {
+      "Id": "bc2fafb27e974af4bdacb68c35b9c067",
+      "ReferrerId": 2,
+      "InvitationId": null,
+      "Name": "Oliver Brooks",
+      "Email": "oliver.brooks.enquiry@example.com",
+      "Phone": "\u002B1 604 555 0102",
+      "Interest": "Income Solution",
+      "Salesperson": "Sarah Mitchell",
+      "Status": "New",
+      "CreatedAt": "2026-09-22T17:23:16.5506104+00:00"
+    },
+    {
+      "Id": "100bb1ebd99f4c01974b7e56070b5452",
+      "ReferrerId": 3,
+      "InvitationId": null,
+      "Name": "Ava Johnson",
+      "Email": "ava.johnson.enquiry@example.com",
+      "Phone": "\u002B1 613 555 0103",
+      "Interest": "General enquiry",
+      "Salesperson": "Sarah Mitchell",
+      "Status": "New",
+      "CreatedAt": "2026-09-21T17:23:16.5506104+00:00"
+    },
+    {
+      "Id": "5dd4ccf45e044ad4a6dec202f411fa42",
+      "ReferrerId": 1,
+      "InvitationId": null,
+      "Name": "William Taylor",
+      "Email": "william.taylor.enquiry@example.com",
+      "Phone": "\u002B1 403 555 0104",
+      "Interest": "Reverse mortgage",
+      "Salesperson": "Sarah Mitchell",
+      "Status": "Contacted",
+      "CreatedAt": "2026-09-20T17:23:16.5506104+00:00"
+    },
+    {
+      "Id": "514c7b250a0f4c6daf840eaaa0e608ce",
+      "ReferrerId": 2,
+      "InvitationId": null,
+      "Name": "Sophie Campbell",
+      "Email": "sophie.campbell.enquiry@example.com",
+      "Phone": "\u002B1 902 555 0105",
+      "Interest": "Income Solution",
+      "Salesperson": "Sarah Mitchell",
+      "Status": "Contacted",
+      "CreatedAt": "2026-09-19T17:23:16.5506104+00:00"
+    }
+  ],
+  "PresentationVersion": 1
+}

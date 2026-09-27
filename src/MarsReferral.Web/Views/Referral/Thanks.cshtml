@@ -1,0 +1,5 @@
+@{ViewData["Title"]="Enquiry confirmation";var reference=TempData["EnquiryReference"] as string;var customerName=TempData["EnquiryCustomerName"] as string;var accountMessage=TempData["EnquiryAccountMessage"] as string;var referralMessage=TempData["EnquiryReferralMessage"] as string;}
+<section class="panel thank-you"><span class="confirmation-mark">✓</span><span class="eyebrow">YOUR ENQUIRY / DEMO CONFIRMATION</span><h1>Thanks for contacting us. Our salesperson will get back to you shortly.</h1>
+@if(reference!=null){<p>Reference: <strong>@reference</strong></p><p>Assigned to <strong>Sarah Mitchell</strong>, our demo salesperson.</p><div class="hint"><p><strong>@customerName</strong></p><p>@accountMessage</p><p>@referralMessage</p></div><p>Your enquiry is available under <strong>My enquiries</strong>. No reward is created until qualifying funding and approval.</p>}
+<a class="button" href="/customer">Continue to Customer Portal →</a><a class="button secondary" href="/customer/enquiries">View my enquiry →</a>
+<p class="field-help">Follow-up is simulated for this presentation. No actual call or message will be made.</p></section>

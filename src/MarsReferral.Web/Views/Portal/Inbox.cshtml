@@ -1,0 +1,14 @@
+@model PortalModel
+<partial name="_RecordTableStyles" />
+@{ ViewData["Title"] = Model.IsOperations ? "Messages" : "My inbox"; }
+<div class="page-heading"><div><div class="eyebrow">MESSAGES / INBOX</div><h1>@ViewData["Title"]</h1><p class="muted">Funding invitations and reward updates, newest first. Messages stay inside this demo.</p></div><span class="badge neutral">@Model.Pagination.Total messages</span></div>
+<section class="panel records-panel">
+<div class="table-scroll" role="region" aria-label="Messages" tabindex="0">
+<table class="records-table"><caption class="sr-only">Messages, newest first</caption><thead><tr><th scope="col">Message ID</th><th scope="col">Date (UTC)</th>@if(Model.IsOperations){<th scope="col">Recipient</th>}<th scope="col">Subject</th><th scope="col">Message</th></tr></thead><tbody>
+@foreach(var m in Model.Data.Messages){
+<tr><td>#@m.Id</td><td class="record-date"><time datetime="@m.CreatedAt.ToString("O")">@m.CreatedAt.UtcDateTime.ToString("dd MMM yyyy, HH:mm:ss")</time></td>@if(Model.IsOperations){<td><strong>@Model.Name(m.CustomerId)</strong></td>}<td><strong>@m.Title</strong></td><td class="record-detail">@PersonNames.Bold(m.Body,Model.Data) @if(!Model.IsOperations && m.Title=="Your funding is complete"){<a class="record-guide" asp-action="Guide">Your simple referral guide →</a>}</td></tr>
+}
+@if(Model.Data.Messages.Length==0){<tr><td colspan="@(Model.IsOperations ? 5 : 4)" class="empty">No messages yet. Updates will appear here as you move through the program.</td></tr>}
+</tbody></table></div>
+<partial name="_Pagination" model="Model.Pagination" />
+</section>

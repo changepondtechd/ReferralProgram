@@ -1,0 +1,16 @@
+@model PortalModel
+@{ var input = ViewData["ReferInput"] as ReferInput ?? new ReferInput(); }
+<dialog id="refer-dialog" class="refer-dialog" aria-labelledby="refer-title" data-open-on-load="@(ViewData["OpenReferral"] is true ? "true" : "false")">
+ <div class="dialog-heading"><div><span class="eyebrow">ONE INTRODUCTION. TWO BENEFITS.</span><h2 id="refer-title">Refer someone</h2></div><button type="button" class="icon-button" data-close aria-label="Close referral form">×</button></div>
+ <p>Create a demo account for your friend. They can then select their name on the <a href="/customer/login" target="_blank" rel="noopener">customer sign-in page</a>.</p>
+ <div class="referral-code-note">Your referral code <strong>@Model.Current!.Code</strong> is attached automatically.</div>
+ <form asp-controller="Customer" asp-action="Refer" method="post">
+  <div asp-validation-summary="All" class="validation" role="alert"></div>
+  <label for="refer-name">Friend's full name</label><input id="refer-name" name="Name" value="@input.Name" required minlength="2" maxlength="80" autocomplete="off" placeholder="e.g. Alex Morgan"/>
+  <label for="refer-email">Email address</label><input id="refer-email" name="Email" type="email" value="@input.Email" required maxlength="160" autocomplete="off" placeholder="alex@example.com"/>
+  <label for="refer-phone">Phone number</label><input id="refer-phone" name="Phone" type="tel" value="@input.Phone" required maxlength="30" autocomplete="off" aria-describedby="refer-phone-help" placeholder="e.g. +1 416 555 0123"/>
+  <p id="refer-phone-help" class="field-help">10–15 digits. Include the country code where needed.</p>
+  <p class="field-help">Use details your friend has agreed to share. This demo does not send an email or SMS. Rewards become eligible only after funding and approval.</p>
+  <div class="actions"><button class="button" type="submit">Create referral &amp; account →</button><button class="button secondary" type="button" data-close>Cancel</button></div>
+ </form>
+</dialog>

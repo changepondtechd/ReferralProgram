@@ -1,0 +1,23 @@
+@model Pagination
+@{ var action = ViewContext.RouteData.Values["action"]?.ToString(); }
+<div class="pagination-bar">
+    <p class="muted">Showing @Model.First–@Model.Last of @Model.Total records</p>
+    <form method="get" asp-action="@action" class="page-size">
+        <label for="pageSize">Rows per page</label>
+        <select id="pageSize" name="pageSize">
+            @foreach (var size in new[] { 10, 25, 50 }) { <option value="@size" selected="@(size == Model.PageSize)">@size</option> }
+        </select>
+        <button class="button secondary small" type="submit">Apply</button>
+    </form>
+    <nav class="pagination-links" aria-label="Table pagination">
+        @if (Model.PageNumber > 1) {
+            <a asp-action="@action" asp-route-page="1" asp-route-pageSize="@Model.PageSize">First</a>
+            <a asp-action="@action" asp-route-page="@(Model.PageNumber - 1)" asp-route-pageSize="@Model.PageSize">Previous</a>
+        } else { <span aria-disabled="true">First</span><span aria-disabled="true">Previous</span> }
+        <span aria-current="page">Page @Model.PageNumber of @Model.PageCount</span>
+        @if (Model.PageNumber < Model.PageCount) {
+            <a asp-action="@action" asp-route-page="@(Model.PageNumber + 1)" asp-route-pageSize="@Model.PageSize">Next</a>
+            <a asp-action="@action" asp-route-page="@Model.PageCount" asp-route-pageSize="@Model.PageSize">Last</a>
+        } else { <span aria-disabled="true">Next</span><span aria-disabled="true">Last</span> }
+    </nav>
+</div>

@@ -1,0 +1,14 @@
+@model PortalModel
+<partial name="_RecordTableStyles" />
+@{ ViewData["Title"] = "Activity log"; }
+<div class="page-heading"><div><div class="eyebrow">@(Model.IsOperations ? "OPERATIONS / AUDIT TRAIL" : "MY ACCOUNT / ACTIVITY")</div><h1>Activity log</h1><p class="muted">@(Model.IsOperations ? "Profile, application and reward changes for this session, newest first." : "Changes to your profile, applications and rewards, newest first.")</p></div><span class="badge neutral">@Model.Pagination.Total events</span></div>
+<section class="panel records-panel">
+<div class="table-scroll" role="region" aria-label="Activity log" tabindex="0">
+<table class="records-table"><caption class="sr-only">Activity log, newest first</caption><thead><tr><th scope="col">Date (UTC)</th><th scope="col">Performed by</th>@if(Model.IsOperations){<th scope="col">Customer</th>}<th scope="col">Activity</th><th scope="col">Details</th></tr></thead><tbody>
+@foreach(var a in Model.Data.Audit){
+<tr><td class="record-date"><time datetime="@a.At.ToString("O")">@a.At.UtcDateTime.ToString("dd MMM yyyy, HH:mm:ss")</time></td><td>@PersonNames.Bold(a.Actor,Model.Data)</td>@if(Model.IsOperations){<td><strong>@(a.CustomerId is int id ? Model.Name(id) : "—")</strong></td>}<td><strong>@a.Action</strong></td><td class="record-detail">@PersonNames.Bold(a.Detail,Model.Data)</td></tr>
+}
+@if(Model.Data.Audit.Length==0){<tr><td colspan="@(Model.IsOperations ? 5 : 4)" class="empty">No activity recorded yet.</td></tr>}
+</tbody></table></div>
+<partial name="_Pagination" model="Model.Pagination" />
+</section>

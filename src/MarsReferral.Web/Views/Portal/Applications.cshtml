@@ -1,0 +1,27 @@
+@model PortalModel
+@{
+ ViewData["Title"]=Model.IsOperations?"Amount approvals":"My applications";
+ var list=Model.Data.Applications.Where(x=>(string.IsNullOrEmpty(Model.Status)||x.Stage.ToString()==Model.Status)&&(string.IsNullOrEmpty(Model.Query)||$"{x.Id} {Model.Name(x.CustomerId)}".Contains(Model.Query,StringComparison.OrdinalIgnoreCase))).OrderByDescending(x=>x.Id).ToArray();
+}
+<div class="page-heading"><div><div class="eyebrow">@(Model.IsOperations?"ADMIN / APPLICATION DECISIONS":"YOUR FUNDING JOURNEY")</div><h1>@(Model.IsOperations?"The right amount. Approved.":"Every milestone matters.")</h1><p class="muted">@(Model.IsOperations?"Review the requested amount, approve a final amount, then confirm account funding separately.":"Track your requested amount, admin's approved amount and funding progress.")</p></div><button class="button" type="button" data-dialog="application-dialog">+ New application</button></div>
+<div class="tabs"><a class="@(Model.Status==""?"selected":"")" asp-action="Applications">All applications</a>@foreach(var stage in Enum.GetNames<ApplicationStage>()){<a class="@(Model.Status==stage?"selected":"")" asp-action="Applications" asp-route-status="@stage">@stage</a>}</div>
+<section class="panel"><div class="section-heading"><h2>Application tracker <span class="count">@list.Length</span></h2><form class="search" method="get"><input type="hidden" name="status" value="@Model.Status"/><label class="sr-only" for="q">Search applications</label><input id="q" name="q" value="@Model.Query" placeholder="Customer name or application ID"/><button class="button small secondary">Search</button></form></div>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>Customer</th><th>Requested</th><th>Approved</th><th>Stage</th><th>@(Model.IsOperations?"Next action":"Updated")</th></tr></thead><tbody>
+@foreach(var a in list){
+<tr><td><strong>#@a.Id</strong><small>@a.Purpose</small></td><td><strong>@Model.Name(a.CustomerId)</strong></td><td><strong>@a.Amount.ToString("N2")</strong><small>Demo units</small></td><td><strong>@(a.ApprovedAmount?.ToString("N2")??"Awaiting review")</strong>@if(a.ApprovedAmount!=null){<small>Demo units</small>}</td><td><span class="badge @a.Stage.ToString().ToLowerInvariant()">@a.Stage</span></td><td>
+@if(Model.IsOperations && a.Stage==ApplicationStage.Submitted){
+<details><summary>Approve amount ↗</summary><form asp-action="ApproveAmount" method="post"><input type="hidden" name="id" value="@a.Id"/><label for="amount-@a.Id">Approved amount</label><input id="amount-@a.Id" type="number" name="amount" min="1000" max="@a.Amount.ToString(System.Globalization.CultureInfo.InvariantCulture)" step="0.01" value="@a.Amount.ToString(System.Globalization.CultureInfo.InvariantCulture)" required/><button class="button small">Approve amount</button></form></details>
+}
+@if(Model.IsOperations && a.Stage==ApplicationStage.Approved){
+<form asp-action="Transition" method="post" data-confirm="Confirm the approved amount has reached the customer's account in this simulation? This can create rewards and a referral invitation."><input type="hidden" name="id" value="@a.Id"/><input type="hidden" name="stage" value="Funded"/><button class="button small">Confirm funding</button></form>
+}
+@if(Model.IsOperations && a.Stage is ApplicationStage.Submitted or ApplicationStage.Approved){
+<form asp-action="Transition" method="post" data-confirm="Cancel this application? This cannot be undone in the demo."><input type="hidden" name="id" value="@a.Id"/><input type="hidden" name="stage" value="Cancelled"/><button class="text-button danger">Cancel application</button></form>
+}else{<small>@(a.FundedAt?.ToString("dd MMM yyyy, HH:mm")??a.CreatedAt.ToString("dd MMM yyyy"))</small>}
+</td></tr>
+}
+</tbody></table></div>@if(list.Length==0){<div class="empty"><span>▤</span><h3>No applications here yet.</h3><p>Create an application or select a different stage.</p></div>}</section>
+<div class="hint"><strong>Approval and funding are different milestones.</strong><p>Admin may approve an amount from 1,000 up to the requested amount. Approval alone does not generate referral rewards. The first eligible funding after code attachment creates one reward pair per referred customer.</p></div>
+<dialog id="application-dialog"><div class="dialog-heading"><h2>A new beginning.</h2><button type="button" class="icon-button" data-close aria-label="Close dialog">×</button></div><p class="muted">Submit a demo application. Admin reviews the amount before confirming funding.</p><form asp-action="CreateApplication" method="post">
+@if(Model.IsOperations){<label for="customerId">Customer</label><select id="customerId" name="customerId">@foreach(var c in Model.Data.Customers.Where(x=>x.OnboardingComplete)){<option value="@c.Id">@c.Name</option>}</select>}
+<label for="purpose">Purpose</label><select id="purpose" name="purpose"><option>Home purchase</option><option>Refinance</option><option>Home improvement</option><option>Reverse mortgage</option><option>Mortgage</option></select><label for="amount">Requested amount in demo units</label><input id="amount" type="number" name="amount" min="1000" max="10000000" step="0.01" required placeholder="250000"/><button class="button full">Submit application →</button></form></dialog>
