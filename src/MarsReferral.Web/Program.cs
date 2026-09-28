@@ -2,6 +2,7 @@ using MarsReferral.Core;
 using MarsReferral.Web.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,9 @@ var app = builder.Build();
 // Load and validate saved data before accepting requests.
 _ = app.Services.GetRequiredService<ReferralService>();
 if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/error");
+app.UseForwardedHeaders(new ForwardedHeadersOptions {
+    ForwardedHeaders = ForwardedHeaders.XForwardedProto
+});
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();

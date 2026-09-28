@@ -49,6 +49,7 @@ SharingTests.Run();
 EnquiryRegistrationTests.Run();
 
 ReferralQrTests.Run();
+ReferralSocialPostTests.Run();
 
 SentMessagesTests.Run();
 ReferralEligibilityTests.Run();

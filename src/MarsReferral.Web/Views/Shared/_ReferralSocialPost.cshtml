@@ -1,0 +1,15 @@
+@model ReferralSocialPost
+<section class="referral-social-post" aria-labelledby="referral-social-title">
+ <h3 id="referral-social-title">Share a post with your network</h3>
+ <p>Introduce your network to HomeEquity Bank and the Customer-to-Customer referral program. Anyone interested can follow your link and register with your referral code attached automatically.</p>
+ <label for="referral-social-text">Suggested post</label>
+ <textarea id="referral-social-text" readonly rows="8" aria-describedby="referral-social-help">@Model.Text</textarea>
+ <p id="referral-social-help" class="field-help">For LinkedIn and Facebook, copy the post first, open the sharing window, and paste it into your post. X / Twitter opens with a shorter suggested post and your referral link. Review and publish on the selected platform; opening a sharing window does not publish automatically.</p>
+ <div class="actions referral-social-actions">
+  <button class="button small secondary" type="button" data-copy="@Model.Text">Copy post</button>
+  <a class="button small" href="@Model.LinkedInUrl" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens a new tab)</span></a>
+  <a class="button small" href="@Model.TwitterUrl" target="_blank" rel="noopener noreferrer">X / Twitter<span class="sr-only"> (opens a new tab)</span></a>
+  <a class="button small" href="@Model.FacebookUrl" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens a new tab)</span></a>
+ </div>
+ @if(Model.IsLocalAddress){<p class="field-help referral-qr-warning" role="note">This referral link uses localhost. Open the portal at a publicly reachable site address before sharing a post so your network can register.</p>}
+</section>

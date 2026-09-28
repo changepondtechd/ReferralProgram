@@ -427,3 +427,4 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+/src/MarsReferral.Web/App_Data/referral-data.json.lock
